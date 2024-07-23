@@ -1,6 +1,9 @@
 import express from "express";
+import helmet from 'helmet';
 const app = express();
 const port = 3001;
+
+app.use(helmet());
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello LBB7!');  // Sending a response with status code 200
