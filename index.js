@@ -1,7 +1,7 @@
 import express from "express";
 import helmet from 'helmet';
 const app = express();
-const port = 3002;
+const port = 4000;
 
 app.use(helmet());
 
