@@ -9,7 +9,7 @@ const activities = [
     "activity_submitted": "1719486190058",
     "activity_type": "run",
     "activity_duration": "30"
-}
+    }
 ];
 
 
@@ -32,8 +32,8 @@ app.listen(port, () => {
 });
 
 app.post('/activities', (req, res) => {
-  const newActivity = req.body.newActivity;  // Assuming the request body contains an 'activity' object
-    
+    const newActivity = req.body.newActivity;  // Assuming the request body contains an 'activity' object
+    activies.push(newActivity);
   console.log(newActivity);
 
     if (!newActivity) {
@@ -43,9 +43,19 @@ app.post('/activities', (req, res) => {
       "data": null 
     });
     }
+
+    const activity = {
+        ...newActivity,
+        id: uuid4(),
+        activity_submitted: date.now(), 
+    }
+    activities.push(activity);
+    console.log(activity);
   
     // You can process the activity data here (e.g., save it to a database)
   
     // Sending a response with status code 200
     res.status(200).send({ message: 'Activity received', activity });
-  });
+});
+
+//TO RUN, OPEN TERMINAL AND TYPE "node index.js" THEN TYPE "http://localhost:3002/" INTO GOOGLE OR POSTMAN
