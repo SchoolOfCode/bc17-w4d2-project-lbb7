@@ -55,7 +55,6 @@ app.post('/activities', (req, res) => {
   
   // Sending a response with status code 200
   res.status(200).send({ 
-    message: 'Activity received', 
-    activity 
+  activity 
   });
 });
