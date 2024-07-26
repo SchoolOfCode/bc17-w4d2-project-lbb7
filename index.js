@@ -1,7 +1,7 @@
 // import express from "./node_modules/express/index.js"; // Long way of importing packages
 import express from "express"; // short way of importing packages (recommended)
 import helmet from 'helmet';
-import { v4 as uuidv4 } from 'uuid'; // for generatig unique ids
+import { v4 as uuidv4 } from 'uuid'; // for generating unique ids
 
 const app = express();
 const port = 5005;
