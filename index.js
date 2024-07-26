@@ -1,9 +1,14 @@
-import express from "express";
+// import express from "./node_modules/express/index.js"; // Long way of importing packages
+import express from "express"; // short way of importing packages (recommended)
 import helmet from 'helmet';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; // for generatig unique ids
 
 const app = express();
-const port = 4000;
+const port = 5005;
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);  // Logging a message when the app is listening on the specified port
+});
 
 const activities = [
   {
@@ -30,7 +35,7 @@ app.get('/activities', (req, res) => {
 
 app.post('/activities', (req, res) => {
   const newActivity = req.body;  // Assuming the request body contains the new activity object
-
+  
   if (!newActivity || !newActivity.activity_type || !newActivity.activity_duration) {
     // Sending a 400 Bad Request response if no activity data is sent or if required fields are missing
     return res.status(400).json({ 
@@ -38,23 +43,19 @@ app.post('/activities', (req, res) => {
       "data": null 
     });
   }
-
+  
   const activity = {
     ...newActivity,
-    id: 12345, //uuid4(),
-    activity_submitted: Date.now()
+    id: 12345, //placeholder value
+    activity_submitted: Date.now() //adds current date
   };
-
-  activities.push(activity);
-  console.log(activity);
-
+  
+  activities.push(activity); //adds new actviity to 'activities' array
+  console.log(activities);
+  
   // Sending a response with status code 200
   res.status(200).send({ 
     message: 'Activity received', 
     activity 
   });
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);  // Logging a message when the app is listening on the specified port
 });
