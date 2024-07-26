@@ -19,7 +19,7 @@ const activities = [
   }
 ];
 
-app.use(helmet());
+app.use(helmet()); //
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -46,7 +46,7 @@ app.post('/activities', (req, res) => {
   
   const activity = {
     ...newActivity,
-    id: 12345, //placeholder value
+    id: uuidv4(),
     activity_submitted: Date.now() //adds current date
   };
   
