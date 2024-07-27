@@ -19,7 +19,7 @@ const activities = [
   }
 ];
 
-app.use(helmet()); //
+app.use(helmet()); 
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 app.get('/activities', (req, res) => {
   res.status(200).json({
-    "error": null,
+    "success": true,
     "data": activities
   });  // Sending a response with status code 200
 });
@@ -54,7 +54,40 @@ app.post('/activities', (req, res) => {
   console.log(activities);
   
   // Sending a response with status code 200
-  res.status(200).send({ 
-  activity 
+  res.status(200).json({ 
+    "success": true,
+    "data": activities
+  });
+});
+
+
+app.put('/activities', (req,res) => {
+  const updatedActivity = req.body;
+
+  //Check if an ID has been sent in the PUT body request and if not return error message
+  if(!updatedActivity || !updatedActivity.id) {
+    return res.status(400).json({ 
+      "error": true,
+      "data": null 
+    });
+  }
+
+  //Make sure that the ID sent in the request matches an existing ID in activites array and if it does implement changes in the PUT body request 
+  const activityIndex = activities.findIndex(activity => activity.id === updatedActivity.id);
+
+  // If the activity exists, update it
+  if (activityIndex !== -1) {
+    activities[activityIndex] = updatedActivity;
+    console.log(activities);
+
+    return res.status(200).json({
+      "success": true,
+      "data": activities
+    });
+  } 
+  return res.status(404).json({
+    "error": true,
+    "message": "Activity not found",
+    "data": null
   });
 });
