@@ -1,10 +1,10 @@
-// import express from "./node_modules/express/index.js"; // Long way of importing packages
-import express from "express"; // short way of importing packages (recommended)
-import helmet from 'helmet';
+//Import modules list
+import express from "express"; // for creating express applications
+import helmet from 'helmet';  // for enhanced security
 import { v4 as uuidv4 } from 'uuid'; // for generating unique ids
 
-const app = express();
-const port = 5005;
+const app = express();  // initialised an express application
+const port = 5005; // initialised port number
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);  // Logging a message when the app is listening on the specified port
@@ -72,8 +72,12 @@ app.put('/activities', (req,res) => {
     });
   }
 
-  //Make sure that the ID sent in the request matches an existing ID in activites array and if it does implement changes in the PUT body request 
-  const activityIndex = activities.findIndex(activity => activity.id === updatedActivity.id);
+  //Make sure that the ID sent in the request matches an existing ID in activites array 
+  // Returns the index number in the array that matches the ID. Returns -1 if there is no matching ID.
+  const activityIndex = activities.findIndex(activity => activity.id === updatedActivity.id); 
+
+
+  console.log(activityIndex);
 
   // If the activity exists, update it
   if (activityIndex !== -1) {
